@@ -1,8 +1,9 @@
-import { useState,useContext } from "react";
+import { useState,useContext,useEffect, use } from "react";
 import axios from "axios";
 import Header from './Header';
 import Footer from './Footer';
 import { ServerContext } from "../context/ServerContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const {login , account, loading} = useContext(ServerContext);
@@ -10,6 +11,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const navigator = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,6 +25,13 @@ export default function Login() {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    console.log("Account changed:", account);
+    if (account) {
+      navigator("/dashboard");
+    } 
+  }, [account]);
 
   return (
     <> 

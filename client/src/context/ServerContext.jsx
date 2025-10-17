@@ -16,7 +16,7 @@ export const ServerProvider = ({ children }) => {
                 password,
             });
             console.log(response.data);
-            setAccount(response.data.user);
+            setAccount(response.data);
             setLoading(false);
         } catch (error) {
             throw error;
@@ -32,7 +32,7 @@ export const ServerProvider = ({ children }) => {
                 password,
             });
             console.log(response.data);
-            setAccount(response.data.user);
+            setAccount(response.data);
             setLoading(false);
         } catch (error) {
             throw error;

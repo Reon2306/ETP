@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState , useEffect} from "react";
 import axios from "axios";
 import Header from './Header';
 import Footer from './Footer';
 import { ServerContext } from "../context/ServerContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const {signup, account, loading} = useContext(ServerContext);
@@ -11,6 +12,8 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const navigator = useNavigate();
 
   const handleSubmit = async (e:any) => {
     e.preventDefault();
@@ -28,6 +31,12 @@ export default function Signup() {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+      if (account) {
+        navigator("/dashboard");
+      } 
+    }, [account]);
 
   return (
     <>
