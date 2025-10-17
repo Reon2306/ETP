@@ -1,45 +1,31 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import axios from "axios";
-
+import Header from './Header';
+import Footer from './Footer';
+import { ServerContext } from "../context/ServerContext";
 
 export default function Login() {
+  const {login , account, loading} = useContext(ServerContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
     setSuccess("");
 
     try {
-      const response = await axios.post("/api/login", {
-        email,
-        password,
-      });
-      if (response.data.token) {
-        setSuccess("Login successful!");
-        localStorage.setItem("token", response.data.token); // Save JWT token
-      } else {
-        setError("Unexpected response from server.");
-      }
+      await login(email, password);
     } catch (err) {
-      if (err.response && err.response.data?.message) {
-        setError(err.response.data.message);
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
-    } finally {
-      setLoading(false);
+      console.log(err);
     }
   };
 
   return (
     <> 
-
+    <Header />
     <div className="flex min-h-screen items-center justify-center bg-neutral-800">
       <div className="w-full max-w-md p-8 bg-blue-200 rounded-2xl shadow-lg">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">
@@ -98,7 +84,9 @@ export default function Login() {
           </a>
         </p>
       </div>
-    </div></>
+    </div>
+    <Footer />
+    </>
    
   );
 }

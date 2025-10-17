@@ -1,6 +1,10 @@
+import Header from './Header';
+import Footer from './Footer';
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white text-gray-900">
+      <Header />
       {/* Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center">
         <h1 className="text-5xl font-bold mb-6">
@@ -60,10 +64,7 @@ export default function LandingPage() {
         </button>
       </section>
 
-      {/* Footer */}
-      <footer className="text-center py-8 text-gray-500 text-sm">
-        © {new Date().getFullYear()} AI Learning Solutions. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   );
 }

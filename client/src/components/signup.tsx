@@ -1,44 +1,37 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import Header from './Header';
+import Footer from './Footer';
+import { ServerContext } from "../context/ServerContext";
 
 export default function Signup() {
+  const {signup, account, loading} = useContext(ServerContext);
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e:any) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
     setSuccess("");
 
+    if(!name || !email || !password) {  
+      alert("Please fill all the fields");
+      return;
+    }
+    console.log(name,email,password);
     try {
-      const response = await axios.post("/api/signup", {
-        email,
-        password,
-      });
-
-      if (response.data.success) {
-        setSuccess("Account created successfully!");
-        setEmail("");
-        setPassword("");
-      } else {
-        setError("Signup failed. Please try again.");
-      }
+      await signup(name, email, password);
     } catch (err:any) {
-      if (err.response?.data?.message) {
-        setError(err.response.data.message);
-      } else {
-        setError("Something went wrong. Please try again.");
-      }
-    } finally {
-      setLoading(false);
+      console.log(err);
     }
   };
 
   return (
+    <>
+    <Header />
     <div className="flex min-h-screen items-center justify-center  bg-neutral-800">
       <div className="w-full max-w-md p-8 bg-blue-200 rounded-2xl shadow-lg">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">
@@ -49,6 +42,19 @@ export default function Signup() {
         {success && <p className="text-green-600 text-sm text-center mb-4">{success}</p>}
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <div>
+            <label className="block text-sm font-medium text-gray-600">
+              Username
+            </label>
+            <input
+              type="text"
+              className="mt-1 w-full px-4 py-2 border border-blue-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter your username"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
           <div>
             <label className="block text-sm font-medium text-gray-600">
               Email
@@ -94,5 +100,7 @@ export default function Signup() {
         </p>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
