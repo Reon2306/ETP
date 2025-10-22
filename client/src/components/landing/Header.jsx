@@ -9,7 +9,7 @@ export default function Header() {
         <div className="flex items-center h-16 justify-between">
           {/* Left: Logo */}
           <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-black">StudyAI</span>
+            <span className="text-3xl font-bold text-black">Reiken</span>
           </div>
 
           {/* Center: Desktop Nav */}
