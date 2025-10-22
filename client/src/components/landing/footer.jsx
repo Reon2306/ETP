@@ -18,7 +18,7 @@ export default function Footer() {
                     <div className="bg-white p-8 rounded-xl shadow border border-gray-200 flex flex-col items-center text-center hover:shadow-lg transition">
                         <Mail className="w-10 h-10 text-blue-700 mb-4" />
                         <h3 className="font-semibold text-black mb-2">Email</h3>
-                        <p className="text-gray-500">support@studyai.com</p>
+                        <p className="text-gray-500">support@reiken.com</p>
                     </div>
 
                     {/* Phone */}
