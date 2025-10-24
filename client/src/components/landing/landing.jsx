@@ -1,9 +1,16 @@
+import { useCallback, useContext, useEffect } from 'react';
 import Header from './Header';
 import Footer from './footer';
 import { ArrowRight } from "lucide-react";
 import { Brain, BookOpen, FileText, Zap, BarChart3 } from "lucide-react";
+import { ServerContext } from '../../context/ServerContext';
+import { useNavigate } from 'react-router-dom';
+import Dashboard from '../dashboard/home';
 
 export default function LandingPage() {
+  const {account} = useContext(ServerContext);
+  const navigate=useNavigate();
+  useEffect(()=>{if(account)navigate("dashboard")},[account]);
   return (
     <>
       <Header />

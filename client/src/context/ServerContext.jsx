@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 export const ServerContext = createContext();
 
 export const ServerProvider = ({ children }) => {
-    const [account, setAccount] = useState(null);
+    const [account, setAccount] = useState(JSON.parse(localStorage.getItem('user')) || null);
     const [loading, setLoading] = useState(false);
 
     const signup = async (name, email, password) => {
@@ -16,6 +16,7 @@ export const ServerProvider = ({ children }) => {
                 password,
             });
             console.log(response.data);
+            localStorage.setItem('user', JSON.stringify(response.data));
             setAccount(response.data);
             setLoading(false);
         } catch (error) {
@@ -32,6 +33,7 @@ export const ServerProvider = ({ children }) => {
                 password,
             });
             console.log(response.data);
+            localStorage.setItem('user', JSON.stringify(response.data));
             setAccount(response.data);
             setLoading(false);
         } catch (error) {
