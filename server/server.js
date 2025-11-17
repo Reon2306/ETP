@@ -1,8 +1,12 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
 
 import authRoutes from "./routes/authRoutes.js";
+import modelRoutes from "./routes/modelRoutes.js";
+
+dotenv.config();
 
 const app = express();
 export const prisma = new PrismaClient();
@@ -13,11 +17,12 @@ app.use(
         origin: "*",
     }),
 );
-
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //Routes
 app.use("/api", authRoutes);
+app.use("/rag", modelRoutes);
 
 //DB status
 app.get("/health", async (req, res) => {
