@@ -80,7 +80,7 @@ export default function Signup() {
                   type="text"
                   placeholder="Your Name"
                   value={name}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setName(e.target.value)}
                   required
                   className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-black placeholder-gray-400 focus:ring-2 focus:ring-blue-700 focus:outline-none"
                 />
