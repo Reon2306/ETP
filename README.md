@@ -75,12 +75,24 @@ npx prisma migrate dev --name init
 
 The app currently uses a single table `User` for demo auth.
 
-### 4) Prepare Ollama models
+### 4) Start Ollama and prepare models
 ```bash
-# In another terminal
+# Terminal A: start the Ollama server (keep this running)
+ollama serve
+```
+
+```bash
+# Terminal B: pull the models you plan to use
 ollama pull nomic-embed-text   # embeddings model (or your chosen embed model)
 ollama pull llama3             # LLM (or llama3.2, etc.)
 ```
+
+Optional verification:
+```bash
+curl -s http://localhost:11434/api/version
+curl -s http://localhost:11434/api/tags
+```
+
 If you use different model names, update `EMBED_MODEL` and `LLM_MODEL` in `server/.env`.
 
 ### 5) Run the servers
