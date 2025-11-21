@@ -183,4 +183,4 @@ Client (`client/.env`):
 ---
 
 ## License
-For academic/demo use. Replace with your license as needed.
+For academic/demo use.
