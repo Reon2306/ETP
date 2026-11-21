@@ -1,4 +1,4 @@
-import { prisma } from "../server.js";
+import { prisma } from "../prisma.js";
 
 // User signup: create a new user
 export const signup = async (req, res) => {

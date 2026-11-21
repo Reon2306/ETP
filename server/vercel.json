@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run build",
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "prisma/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" },
+    { "source": "/health", "destination": "/api/index" }
+  ]
+}
