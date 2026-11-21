@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../axios";
 import { createContext, useState } from "react";
 
 export const ServerContext = createContext();
@@ -10,7 +10,7 @@ export const ServerProvider = ({ children }) => {
     const signup = async (name, email, password) => {
         try {
             setLoading(true);
-            const response = await axios.post("http://localhost:3000/api/signup", {
+            const response = await api.post("/signup", {
                 name,
                 email,
                 password,
@@ -27,7 +27,7 @@ export const ServerProvider = ({ children }) => {
     const login = async (email, password) => {
         try {
             setLoading(true);
-            const response = await axios.post("http://localhost:3000/api/login", {
+            const response = await api.post("/login", {
                 email,
                 password,
             });

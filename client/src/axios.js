@@ -1,5 +1,10 @@
+import axios from "axios";
+
+const apiUrl = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/$/, '');
+
 const instance = axios.create({
-  baseURL: 'https://some-domain.com/api/',
-  timeout: 1000,
-  headers: {'X-Custom-Header': 'foobar'}
+  baseURL: `${apiUrl}/api`,
+  timeout: 10000,
 });
+
+export default instance;
