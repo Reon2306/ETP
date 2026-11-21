@@ -1,11 +1,8 @@
 import express from "express";
 import cors from "cors";
-import { PrismaClient } from "@prisma/client";
-
 import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
-export const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3000;
 
 app.use(
@@ -29,6 +26,10 @@ app.get("/health", async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+if (process.env.VERCEL !== "1") {
+    app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+    });
+}
+
+export default app;
